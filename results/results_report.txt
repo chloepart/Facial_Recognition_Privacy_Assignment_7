@@ -1,0 +1,94 @@
+================================================================================
+Facial Recognition with Privacy Protection - Results Report
+AT&T Face Dataset
+Author: Chloe Partrick
+================================================================================
+
+EXPERIMENT CONFIGURATION
+--------------------------------------------------------------------------------
+Dataset: AT&T Face Database (40 subjects, 10 images each)
+Total images: 400
+Train samples: 320
+Test samples: 80
+Image size: 112 x 92 pixels
+Privacy methods tested: 6
+Model: Multi-Layer Perceptron (MLP) Neural Network
+Architecture: Input -> 512 -> 256 -> 128 -> 40 classes
+
+RESULTS - FACIAL RECOGNITION ACCURACY
+================================================================================
+Privacy Protection Method                Train Acc    Test Acc    
+--------------------------------------------------------------------------------
+Baseline (No Protection)                     100.00%      88.75%
+Basic Pixelization (b=16)                     99.69%      88.75%
+DP-Pix (ε=0.1)                                44.38%       5.00%
+DP-Pix (ε=1)                                  90.62%       1.25%
+DP-Pix (ε=2)                                  91.25%       3.75%
+DP-Pix (ε=4)                                  90.94%      13.75%
+================================================================================
+
+DETAILED RESULTS
+--------------------------------------------------------------------------------
+
+Baseline (No Protection)
+  Method: none
+  Parameters: {}
+  Training Accuracy: 100.0000%
+  Test Accuracy: 88.7500%
+
+Basic Pixelization (b=16)
+  Method: pixelization
+  Parameters: {'block_size': 16}
+  Training Accuracy: 99.6875%
+  Test Accuracy: 88.7500%
+
+DP-Pix (ε=0.1)
+  Method: dp_pix
+  Parameters: {'block_size': 16, 'mosaic_size': 16, 'epsilon': 0.1}
+  Training Accuracy: 44.3750%
+  Test Accuracy: 5.0000%
+
+DP-Pix (ε=1)
+  Method: dp_pix
+  Parameters: {'block_size': 16, 'mosaic_size': 16, 'epsilon': 1}
+  Training Accuracy: 90.6250%
+  Test Accuracy: 1.2500%
+
+DP-Pix (ε=2)
+  Method: dp_pix
+  Parameters: {'block_size': 16, 'mosaic_size': 16, 'epsilon': 2}
+  Training Accuracy: 91.2500%
+  Test Accuracy: 3.7500%
+
+DP-Pix (ε=4)
+  Method: dp_pix
+  Parameters: {'block_size': 16, 'mosaic_size': 16, 'epsilon': 4}
+  Training Accuracy: 90.9375%
+  Test Accuracy: 13.7500%
+
+================================================================================
+SAMPLE IMAGES
+--------------------------------------------------------------------------------
+Sample images have been saved to the 'sample_images' directory:
+  - original.png: Clean sample image
+  - pixelization.png: Basic pixelization (b=16)
+  - dp_pix_eps_0.1.png: DP-Pix with ε=0.1
+  - dp_pix_eps_1.png: DP-Pix with ε=1
+  - dp_pix_eps_2.png: DP-Pix with ε=2
+  - dp_pix_eps_4.png: DP-Pix with ε=4
+  - privacy_comparison.png: All methods side-by-side
+
+================================================================================
+ANALYSIS
+--------------------------------------------------------------------------------
+The results show the trade-off between privacy and accuracy:
+
+1. Baseline (No Protection): Highest accuracy as expected
+2. Basic Pixelization: Reduces accuracy due to loss of fine details
+3. DP-Pix with varying epsilon:
+   - Lower epsilon (ε=0.1): More privacy but lower accuracy
+   - Higher epsilon (ε=4): Less privacy but higher accuracy
+
+The epsilon parameter controls the privacy-utility trade-off in
+differential privacy. Smaller epsilon values provide stronger privacy
+guarantees but add more noise, reducing model accuracy.
